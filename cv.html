@@ -84,12 +84,12 @@
 <body>
 
 <header class="bar">
-  <a class="btn left" href="./" aria-label="Back to links">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span class="lbl">Links</span>
+  <a class="btn left" id="back" href="./" aria-label="Back to links">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span class="lbl" id="back-lbl">Links</span>
   </a>
-  <h1>Music CV</h1>
-  <a class="btn primary right" href="Ahmet_Can_Music_CV.pdf" download aria-label="Download PDF">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/></svg><span class="lbl">Download</span>
+  <h1 id="title">Music CV</h1>
+  <a class="btn primary right" id="dl" href="Ahmet_Can_Music_CV.pdf" download aria-label="Download PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M5 20h14"/></svg><span class="lbl" id="dl-lbl">Download</span>
   </a>
 </header>
 
@@ -99,9 +99,40 @@
   <noscript><p class="status">This viewer needs JavaScript. <a href="Ahmet_Can_Music_CV.pdf">Open the PDF</a> instead.</p></noscript>
 </main>
 
+<script>
+  // Language: ?lang=tr from the link page, then the visitor's last choice, then their device language
+  (function () {
+    var T = {
+      en: { title: "Music CV", page: "Music CV · Ahmet Can", back: "Links", backAria: "Back to links",
+            dl: "Download", dlAria: "Download PDF", loading: "Loading CV…",
+            fail: "Couldn’t show the CV here. <a href=\"Ahmet_Can_Music_CV.pdf\">Open the PDF</a> instead.",
+            old: "This browser can’t show the CV here. <a href=\"Ahmet_Can_Music_CV.pdf\">Open the PDF</a> instead.",
+            page1: "CV page {n} of {total}" },
+      tr: { title: "Müzik CV'si", page: "Müzik CV'si · Ahmet Can", back: "Bağlantılar", backAria: "Bağlantılara dön",
+            dl: "İndir", dlAria: "PDF'i indir", loading: "CV yükleniyor…",
+            fail: "CV burada gösterilemedi. Bunun yerine <a href=\"Ahmet_Can_Music_CV.pdf\">PDF'i açın</a>.",
+            old: "Bu tarayıcı CV'yi burada gösteremiyor. Bunun yerine <a href=\"Ahmet_Can_Music_CV.pdf\">PDF'i açın</a>.",
+            page1: "CV sayfa {n} / {total}" },
+    };
+    var lang = new URLSearchParams(location.search).get("lang");
+    if (!T[lang]) { try { lang = localStorage.getItem("links-lang"); } catch (e) {} }
+    if (!T[lang]) lang = /^tr\b/i.test(navigator.language || "") ? "tr" : "en";
+    try { localStorage.setItem("links-lang", lang); } catch (e) {}
+    var t = window.CV_T = T[lang];
+    document.documentElement.lang = lang;
+    document.title = t.page;
+    document.getElementById("title").textContent = t.title;
+    document.getElementById("back-lbl").textContent = t.back;
+    document.getElementById("back").setAttribute("aria-label", t.backAria);
+    document.getElementById("back").href = "./?lang=" + lang;
+    document.getElementById("dl-lbl").textContent = t.dl;
+    document.getElementById("dl").setAttribute("aria-label", t.dlAria);
+    document.getElementById("status").textContent = t.loading;
+  })();
+</script>
+
 <script nomodule>
-  document.getElementById("status").innerHTML =
-    'This browser can’t show the CV here. <a href="Ahmet_Can_Music_CV.pdf">Open the PDF</a> instead.';
+  document.getElementById("status").innerHTML = window.CV_T.old;
 </script>
 
 <script type="module">
@@ -115,7 +146,7 @@
   const fail = () => {
     pagesEl.replaceChildren();
     statusEl.hidden = false;
-    statusEl.innerHTML = `Couldn’t show the CV here. <a href="${PDF_URL}">Open the PDF</a> instead.`;
+    statusEl.innerHTML = window.CV_T.fail;
   };
 
   let doc;
@@ -166,7 +197,7 @@
       canvas.style.width = css.width + "px";
       canvas.style.height = css.height + "px";
       canvas.setAttribute("role", "img");
-      canvas.setAttribute("aria-label", `CV page ${n} of ${doc.numPages}`);
+      canvas.setAttribute("aria-label", window.CV_T.page1.replace("{n}", n).replace("{total}", doc.numPages));
       wrap.appendChild(canvas);
 
       // keep the PDF's own links clickable (e.g. Row, Row, Row Your Tone)

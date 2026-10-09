@@ -62,6 +62,21 @@
     padding:max(56px,env(safe-area-inset-top)) 18px max(32px,env(safe-area-inset-bottom));
   }
 
+  /* Language switch */
+  .lang{
+    position:absolute;z-index:5;
+    top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));
+    display:flex;gap:2px;padding:3px;border-radius:999px;
+    background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);
+  }
+  .lang button{
+    font:inherit;font-size:.78rem;font-weight:650;letter-spacing:.05em;
+    padding:5px 11px;border:0;border-radius:999px;cursor:pointer;
+    color:var(--muted);background:transparent;transition:background-color .15s,color .15s;
+  }
+  .lang button:hover{color:var(--text)}
+  .lang button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+
   /* Profile */
   .profile{text-align:center}
   .avatar{
@@ -109,7 +124,6 @@
     content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;
     background:var(--accent);border-radius:3px;transform:translateX(-50%) rotate(45deg);
   }
-  .hint{margin:18px 0 0;text-align:center;color:var(--muted);font-size:.9rem}
 
   /* Links of the chosen category */
   .panel{margin-top:20px}
@@ -164,6 +178,11 @@
 </style>
 </head>
 <body>
+<div class="lang" id="lang" role="group" aria-label="Language">
+  <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+  <button type="button" data-lang="tr" aria-pressed="false" lang="tr">TR</button>
+</div>
+
 <main class="wrap">
   <header class="profile">
     <div class="avatar" id="avatar" aria-hidden="true"></div>
@@ -172,7 +191,6 @@
   </header>
 
   <nav class="cats" id="cats" role="tablist" aria-label="Link categories"></nav>
-  <p class="hint" id="hint">Pick a category</p>
   <section class="panel" id="panel" role="tabpanel" hidden>
     <ul class="links" id="links"></ul>
   </section>
@@ -187,6 +205,8 @@
 
 <script>
 /* ═══ EDIT YOUR PAGE HERE ════════════════════════════════════════════
+   Any text can be one string (same in both languages)
+   or { en: "...", tr: "..." } for a separate Turkish version.
    Icon names: user, music, gamepad, link, globe, video, live, mic, camera,
                mail, calendar, ticket, heart, file, shop, chat, none
    ════════════════════════════════════════════════════════════════════ */
@@ -196,7 +216,7 @@ const CONFIG = {
   avatar: "avatar.jpg",  // photo uploaded next to index.html (or a full image URL). Empty = initials
   accent: "#7c5cff",     // main colour (also update theme-color in <head> if you like)
   theme:  "auto",        // "auto" (follows the device), "light" or "dark"
-  openInNewTab: false,   // true = links open in a new tab
+  openInNewTab: true,    // true = links open in a new tab
   startOpen: "",         // a category to show on arrival, e.g. "Music". Empty = visitors pick one
 
   // Each category is a tile. Tapping a tile shows its links.
@@ -204,24 +224,35 @@ const CONFIG = {
   //   link options: subtitle (second line), featured: true (highlighted),
   //                 hidden: true (keep but don't show), copy: "text" (tap copies instead of opening)
   groups: [
-    { title: "Personal", icon: "user", links: [
-      { title: "E-mail", subtitle: "ahmetcankizilcan@gmail.com", url: "mailto:ahmetcankizilcan@gmail.com", icon: "mail", copy: "ahmetcankizilcan@gmail.com" },
+    { title: { en: "Personal", tr: "Kişisel" }, icon: "user", links: [
+      { title: { en: "E-mail", tr: "E-posta" }, subtitle: "ahmetcankizilcan@gmail.com", url: "mailto:ahmetcankizilcan@gmail.com", icon: "mail", copy: "ahmetcankizilcan@gmail.com" },
       { title: "Instagram", subtitle: "@ahmetcankizilcan", url: "https://www.instagram.com/ahmetcankizilcan/", icon: "camera" },
     ]},
-    { title: "Music", icon: "music",
-      about: "Tenor / Baritone · Conductor · Arranger & Engraver · Vocal Coach",
+    { title: { en: "Music", tr: "Müzik" }, icon: "music",
+      about: {
+        en: "Tenor / Baritone · Conductor · Arranger & Engraver · Vocal Coach",
+        tr: "Tenor / Bariton · Şef · Aranjör & Notasyon Editörü · Şan Eğitmeni",
+      },
       links: [
-      { title: "Music CV", url: "cv.html", icon: "file" },
+      { title: { en: "Music CV", tr: "Müzik CV'si" }, url: "cv.html", icon: "file" },
       { title: "YouTube", subtitle: "@AhmetCanK", url: "https://www.youtube.com/@AhmetCanK", icon: "video" },
-      { title: "Row, Row, Row Your Tone", subtitle: "Twelve-tone row generator & post-tonal analysis", url: "https://ackc92.github.io/rowyourtone/", icon: "music" },
+      { title: "Row, Row, Row Your Tone", subtitle: { en: "Twelve-tone row generator & post-tonal analysis", tr: "On iki ton dizisi üreteci ve post-tonal analiz" }, url: "https://ackc92.github.io/rowyourtone/", icon: "music" },
     ]},
-    { title: "Gaming", subtitle: "AC/KC", icon: "gamepad", links: [
+    { title: { en: "Gaming", tr: "Oyun" }, subtitle: "AC/KC", icon: "gamepad", links: [
       { title: "Twitch", subtitle: "ackcshreds", url: "https://www.twitch.tv/ackcshreds", icon: "live" },
       { title: "Instagram", subtitle: "@ackcshreds", url: "https://www.instagram.com/ackcshreds/", icon: "camera" },
     ]},
   ],
 
   footer: "© 2026 Ahmet Can",
+};
+
+// Words used by the page itself
+const UI = {
+  en: { share: "Share this page", linkCopied: "Link copied", cantShare: "Couldn't share", cantCopy: "Couldn't copy",
+        clip: "Copied to clipboard", copy: "Copy", cats: "Link categories", lang: "Language" },
+  tr: { share: "Bu sayfayı paylaş", linkCopied: "Bağlantı kopyalandı", cantShare: "Paylaşılamadı", cantCopy: "Kopyalanamadı",
+        clip: "Panoya kopyalandı", copy: "Kopyala", cats: "Bağlantı kategorileri", lang: "Dil" },
 };
 /* ═══ END OF EDITABLE PART ═══════════════════════════════════════════ */
 
@@ -246,6 +277,18 @@ const ICONS = {
 const GO = '<path d="M7 17 17 7M9 7h8v8"/>';
 const COPY = '<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>';
 const CHECK = '<path d="M5 12.5l4.5 4.5L19 7.5"/>';
+const LANGS = ["en", "tr"];
+const STORE_KEY = "links-lang";
+
+// ── Language: ?lang=tr in the address, then the visitor's last choice, then their device language
+let lang = (() => {
+  const q = new URLSearchParams(location.search).get("lang");
+  if (LANGS.includes(q)) return q;
+  try { const s = localStorage.getItem(STORE_KEY); if (LANGS.includes(s)) return s; } catch (e) {}
+  return /^tr\b/i.test(navigator.language || "") ? "tr" : "en";
+})();
+const tx = (v) => (v && typeof v === "object") ? (v[lang] ?? v.en ?? "") : (v ?? "");
+const ui = (k) => UI[lang][k] ?? UI.en[k];
 
 const svg = (paths, cls) =>
   `<svg${cls ? ` class="${cls}"` : ""} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
@@ -257,9 +300,11 @@ const el = (tag, cls, text) => {
 };
 const initials = (s) => (s || "").trim().split(/\s+/).map(w => w[0] || "").slice(0, 2).join("").toUpperCase();
 const slug = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const isLocal = (url) => !!url && !/^[a-z][a-z0-9+.-]*:/i.test(url) && !url.startsWith("//") && !url.startsWith("#");
 const makeAnchor = (url) => {
   const a = document.createElement("a");
-  a.href = url || "#";
+  // pages inside this site (like the CV viewer) get the chosen language passed along
+  a.href = url ? (isLocal(url) ? url + (url.includes("?") ? "&" : "?") + "lang=" + lang : url) : "#";
   if (CONFIG.openInNewTab && /^https?:/i.test(a.href)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
   return a;
 };
@@ -298,27 +343,28 @@ function linkItem(item, i) {
     a.appendChild(ico);
   }
   const txt = el("span", "txt");
-  txt.appendChild(el("span", "t", item.title));
-  const sub = el("span", "s", item.subtitle || "");
-  if (item.subtitle || item.copy) txt.appendChild(sub);
+  txt.appendChild(el("span", "t", tx(item.title)));
+  const subtitle = tx(item.subtitle);
+  const sub = el("span", "s", subtitle);
+  if (subtitle || item.copy) txt.appendChild(sub);
   a.appendChild(txt);
   a.insertAdjacentHTML("beforeend", svg(item.copy ? COPY : GO, "go"));
 
   // "copy" buttons copy their text instead of opening the link
   if (item.copy) {
     a.classList.add("copy");
-    a.title = "Copy " + item.copy;
+    a.title = ui("copy") + ": " + item.copy;
     sub.setAttribute("aria-live", "polite");
     let timer;
     a.addEventListener("click", async (e) => {
       e.preventDefault();
       if (!(await copyText(item.copy))) { if (item.url) location.href = item.url; return; }  // couldn't copy: open the link instead
       clearTimeout(timer);
-      sub.textContent = "Copied to clipboard";
+      sub.textContent = ui("clip");
       a.classList.add("copied");
       a.querySelector(".go").innerHTML = CHECK;
       timer = setTimeout(() => {
-        sub.textContent = item.subtitle || "";
+        sub.textContent = subtitle;
         a.classList.remove("copied");
         a.querySelector(".go").innerHTML = COPY;
       }, 1800);
@@ -332,16 +378,22 @@ function linkItem(item, i) {
   const c = CONFIG, root = document.documentElement;
   if (c.accent) root.style.setProperty("--accent", c.accent);
   if (c.theme === "light" || c.theme === "dark") root.dataset.theme = c.theme;
-  document.title = c.name;
 
-  // Profile
-  document.getElementById("name").textContent = c.name;
-  const bio = document.getElementById("bio");
-  bio.textContent = c.bio || "";
-  bio.hidden = !c.bio;
+  const cats = document.getElementById("cats");
+  const panel = document.getElementById("panel");
+  const list = document.getElementById("links");
+  const shareLabel = document.querySelector("#share span");
+  // ids come from the English titles, so …/links/#music works in both languages
+  const groups = (c.groups || []).map(g => ({
+    ...g,
+    id: g.id || slug(typeof g.title === "object" ? g.title.en : g.title),
+    links: (g.links || []).filter(l => !l.hidden),
+  }));
+  let current = null;
 
+  // Avatar (initials until, or instead of, the photo)
   const av = document.getElementById("avatar");
-  av.textContent = initials(c.name);           // shown until (or instead of) the photo
+  av.textContent = initials(c.name);
   if (c.avatar) {
     const img = new Image();
     img.alt = "";
@@ -349,32 +401,7 @@ function linkItem(item, i) {
     img.src = c.avatar;
   }
 
-  // Category tiles
-  const cats = document.getElementById("cats");
-  const panel = document.getElementById("panel");
-  const list = document.getElementById("links");
-  const hint = document.getElementById("hint");
-  const groups = (c.groups || []).map(g => ({ ...g, id: slug(g.title), links: (g.links || []).filter(l => !l.hidden) }));
-  let current = null;
-
-  function open(id, byUser) {
-    const g = groups.find(x => x.id === id) || null;
-    current = g ? g.id : null;
-    groups.forEach(x => x.button.setAttribute("aria-selected", String(x === g)));
-    list.replaceChildren();
-    panel.querySelector(".about")?.remove();
-    panel.hidden = !g;
-    hint.hidden = !!g;
-    try { history.replaceState(null, "", location.pathname + location.search + (g ? "#" + g.id : "")); } catch (e) {}
-    if (!g) return;
-    panel.setAttribute("aria-labelledby", g.button.id);
-    if (g.about) panel.insertBefore(el("p", "about", g.about), list);
-    g.links.forEach((item, i) => list.appendChild(linkItem(item, i)));
-    if (byUser && panel.getBoundingClientRect().bottom > window.innerHeight) {
-      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }
-
+  // Tiles
   groups.forEach((g, gi) => {
     const b = el("button", "cat");
     b.type = "button";
@@ -386,8 +413,9 @@ function linkItem(item, i) {
     const big = el("span", "big");
     big.innerHTML = svg(ICONS[g.icon] || ICONS.link);
     b.appendChild(big);
-    b.appendChild(el("span", "name", g.title));
-    if (g.subtitle) b.appendChild(el("span", "sub", g.subtitle));
+    g.nameEl = el("span", "name");
+    b.appendChild(g.nameEl);
+    if (g.subtitle) { g.subEl = el("span", "sub"); b.appendChild(g.subEl); }
     const mini = el("span", "mini");
     mini.setAttribute("aria-hidden", "true");
     mini.innerHTML = g.links.slice(0, 4).map(l => svg(ICONS[l.icon] || ICONS.link)).join("");
@@ -396,6 +424,53 @@ function linkItem(item, i) {
     g.button = b;
     cats.appendChild(b);
   });
+
+  function open(id, byUser) {
+    const g = groups.find(x => x.id === id) || null;
+    current = g ? g.id : null;
+    groups.forEach(x => x.button.setAttribute("aria-selected", String(x === g)));
+    list.replaceChildren();
+    panel.querySelector(".about")?.remove();
+    panel.hidden = !g;
+    try { history.replaceState(null, "", location.pathname + location.search + (g ? "#" + g.id : "")); } catch (e) {}
+    if (!g) return;
+    panel.setAttribute("aria-labelledby", g.button.id);
+    const about = tx(g.about);
+    if (about) panel.insertBefore(el("p", "about", about), list);
+    g.links.forEach((item, i) => list.appendChild(linkItem(item, i)));
+    if (byUser && panel.getBoundingClientRect().bottom > window.innerHeight) {
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+
+  // Put every text on the page in the current language
+  function applyLang() {
+    root.lang = lang;
+    document.title = tx(c.name);
+    document.getElementById("name").textContent = tx(c.name);
+    const bio = document.getElementById("bio");
+    bio.textContent = tx(c.bio);
+    bio.hidden = !tx(c.bio);
+    groups.forEach(g => {
+      g.nameEl.textContent = tx(g.title);
+      if (g.subEl) g.subEl.textContent = tx(g.subtitle);
+    });
+    cats.setAttribute("aria-label", ui("cats"));
+    document.getElementById("lang").setAttribute("aria-label", ui("lang"));
+    document.querySelectorAll("#lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    shareLabel.textContent = ui("share");
+    const foot = document.getElementById("footer");
+    foot.textContent = tx(c.footer);
+    foot.hidden = !tx(c.footer);
+    if (current) open(current, false);   // redraw the open category in the new language
+  }
+
+  document.querySelectorAll("#lang button").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.lang === lang) return;
+    lang = b.dataset.lang;
+    try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
+    applyLang();
+  }));
 
   // Arrow keys move between tiles
   cats.addEventListener("keydown", (e) => {
@@ -407,30 +482,25 @@ function linkItem(item, i) {
     open(next.id, true);
   });
 
+  applyLang();
+
   // Open a category from the link (e.g. …/links/#music) or the startOpen setting
   const fromHash = decodeURIComponent(location.hash.slice(1));
   open(groups.some(g => g.id === fromHash) ? fromHash : slug(c.startOpen), false);
 
-  // Footer
-  const foot = document.getElementById("footer");
-  foot.textContent = c.footer || "";
-  foot.hidden = !c.footer;
-
   // Share button: native share sheet on phones, copy-to-clipboard elsewhere
-  const btn = document.getElementById("share");
-  const label = btn.querySelector("span");
   const flash = (msg) => {
-    label.textContent = msg;
-    setTimeout(() => { label.textContent = "Share this page"; }, 1800);
+    shareLabel.textContent = msg;
+    setTimeout(() => { shareLabel.textContent = ui("share"); }, 1800);
   };
-  btn.addEventListener("click", async () => {
-    const data = { title: document.title, url: location.href.split("#")[0] };
+  document.getElementById("share").addEventListener("click", async () => {
+    const data = { title: document.title, url: location.origin + location.pathname };
     try {
       if (navigator.share) await navigator.share(data);
-      else if (await copyText(data.url)) flash("Link copied");
-      else flash("Couldn't copy");
+      else if (await copyText(data.url)) flash(ui("linkCopied"));
+      else flash(ui("cantCopy"));
     } catch (e) {
-      if (e.name !== "AbortError") flash("Couldn't share");
+      if (e.name !== "AbortError") flash(ui("cantShare"));
     }
   });
 })();
