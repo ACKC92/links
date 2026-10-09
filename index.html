@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- ═══ EDIT BY HAND ═══════════════════════════════════════════════════
+     Link previews (WhatsApp, Instagram, X, iMessage…) read these tags
+     directly, before any script runs — so set your name/description here too.
+     ════════════════════════════════════════════════════════════════════ -->
+<title>Ahmet Can</title>
+<meta name="description" content="Tenor / Baritone · Conductor · Arranger &amp; Engraver · Vocal Coach">
+<meta property="og:title" content="Ahmet Can">
+<meta property="og:description" content="Tenor / Baritone · Conductor · Arranger &amp; Engraver · Vocal Coach">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ackc92.github.io/links/">
+<meta property="og:image" content="https://ackc92.github.io/links/avatar.jpg">
+<meta name="theme-color" content="#7c5cff">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔗</text></svg>">
+
+<style>
+  :root{
+    --accent:#7c5cff;
+    --on-accent:#ffffff;
+    --bg:#f5f4fa;
+    --card:#ffffff;
+    --text:#16141f;
+    --muted:#6a6780;
+    --border:rgba(22,20,31,.09);
+    --shadow:0 1px 2px rgba(22,20,31,.05),0 6px 20px rgba(22,20,31,.06);
+    --radius:16px;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e0d13;--card:#1a1823;--text:#f3f1f9;--muted:#9f9bb2;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.3);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e0d13;--card:#1a1823;--text:#f3f1f9;--muted:#9f9bb2;
+    --border:rgba(255,255,255,.08);
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 24px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    min-height:100vh;min-height:100dvh;
+    font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--text);
+    background-color:var(--bg);
+    background-image:radial-gradient(900px 520px at 50% -140px,color-mix(in srgb,var(--accent) 24%,transparent),transparent 70%);
+    background-repeat:no-repeat;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    width:100%;max-width:540px;margin:0 auto;
+    padding:max(56px,env(safe-area-inset-top)) 18px max(32px,env(safe-area-inset-bottom));
+  }
+
+  /* Profile */
+  .profile{text-align:center}
+  .avatar{
+    width:104px;height:104px;margin:0 auto;border-radius:50%;
+    display:grid;place-items:center;overflow:hidden;
+    background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#000));
+    color:var(--on-accent);font:600 2.1rem/1 ui-serif,Georgia,"Times New Roman",serif;
+    border:4px solid var(--card);box-shadow:var(--shadow);
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  h1{font:600 1.75rem/1.2 ui-serif,Georgia,"Times New Roman",serif;letter-spacing:-.01em;margin:18px 0 6px}
+  .bio{color:var(--muted);margin:0 auto;max-width:38ch}
+
+  /* Category tiles */
+  .cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:32px 0 0}
+  .cat{
+    position:relative;min-width:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+    padding:18px 8px 16px;
+    font:inherit;color:var(--text);text-align:center;cursor:pointer;
+    background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);
+    transition:transform .18s ease,background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  @media (min-width:520px){ .cat{aspect-ratio:1/1} }
+  .cat:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+  .cat:active{transform:scale(.97)}
+  .cat .big{
+    width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+    color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);
+    transition:background-color .18s ease,color .18s ease;
+  }
+  .cat .big svg{width:26px;height:26px}
+  .cat .name{font-weight:650;font-size:1rem;line-height:1.15}
+  .cat .sub{font-size:.72rem;font-weight:600;letter-spacing:.08em;color:var(--muted);margin-top:-6px}
+  .cat .mini{display:flex;gap:6px;color:var(--muted)}
+  .cat .mini svg{width:14px;height:14px}
+  .cat[aria-selected="true"]{
+    background:var(--accent);color:var(--on-accent);border-color:transparent;
+    box-shadow:0 10px 28px color-mix(in srgb,var(--accent) 38%,transparent);
+  }
+  .cat[aria-selected="true"] .big{background:rgba(255,255,255,.18);color:var(--on-accent)}
+  .cat[aria-selected="true"] .sub,.cat[aria-selected="true"] .mini{color:rgba(255,255,255,.82)}
+  .cat[aria-selected="true"]::after{
+    content:"";position:absolute;left:50%;bottom:-7px;width:14px;height:14px;
+    background:var(--accent);border-radius:3px;transform:translateX(-50%) rotate(45deg);
+  }
+  .hint{margin:18px 0 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+  /* Links of the chosen category */
+  .panel{margin-top:20px}
+  .about{margin:0 auto 16px;max-width:36ch;text-align:center;color:var(--muted);font-size:.95rem;line-height:1.5;text-wrap:balance}
+  .links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+  .link a{
+    display:flex;align-items:center;gap:14px;min-height:64px;padding:12px 16px;
+    background:var(--card);color:var(--text);text-decoration:none;
+    border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);
+    transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;
+  }
+  .link a:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+  .link a:active{transform:translateY(0) scale(.99)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .ico{
+    flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+    color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent);
+  }
+  .ico svg{width:21px;height:21px}
+  .txt{flex:1;min-width:0}
+  .t{display:block;font-weight:600}
+  .s{display:block;color:var(--muted);font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .go{flex:none;width:18px;height:18px;color:var(--muted);opacity:.55;transition:opacity .15s,color .15s,transform .15s}
+  .link a:hover .go{opacity:1;color:var(--accent);transform:translate(2px,-2px)}
+  .link a.copy:hover .go{transform:none}
+  .link a.copied .go{opacity:1;color:var(--accent)}
+  .link a.copied .s{color:var(--accent)}
+  .link.noicon .txt{text-align:center;padding-left:32px}
+
+  /* Featured (highlighted) button */
+  .featured a{background:var(--accent);color:var(--on-accent);border-color:transparent}
+  .featured .ico{background:rgba(255,255,255,.18);color:var(--on-accent)}
+  .featured .s,.featured .go,.featured a:hover .go{color:var(--on-accent)}
+  .featured .s{opacity:.82}
+
+  /* Footer */
+  .foot{margin-top:40px;text-align:center;color:var(--muted);font-size:.82rem}
+  .share{
+    display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;
+    font:inherit;font-weight:500;color:var(--text);background:var(--card);
+    border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer;
+  }
+  .share svg{width:16px;height:16px}
+  .foot p{margin:16px 0 0}
+
+  @media (prefers-reduced-motion:no-preference){
+    .profile,.about,.links>li{animation:rise .45s cubic-bezier(.2,.7,.2,1) both}
+    .links>li{animation-delay:calc(var(--i,0) * 50ms)}
+    .cat{animation:rise .5s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(100ms + var(--i,0) * 70ms)}
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="profile">
+    <div class="avatar" id="avatar" aria-hidden="true"></div>
+    <h1 id="name">Ahmet Can</h1>
+    <p class="bio" id="bio"></p>
+  </header>
+
+  <nav class="cats" id="cats" role="tablist" aria-label="Link categories"></nav>
+  <p class="hint" id="hint">Pick a category</p>
+  <section class="panel" id="panel" role="tabpanel" hidden>
+    <ul class="links" id="links"></ul>
+  </section>
+
+  <footer class="foot">
+    <button class="share" id="share" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span>Share this page</span>
+    </button>
+    <p id="footer"></p>
+  </footer>
+</main>
+
+<script>
+/* ═══ EDIT YOUR PAGE HERE ════════════════════════════════════════════
+   Icon names: user, music, gamepad, link, globe, video, live, mic, camera,
+               mail, calendar, ticket, heart, file, shop, chat, none
+   ════════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  name:   "Ahmet Can",
+  bio:    "",            // a line under your name (empty = none)
+  avatar: "avatar.jpg",  // photo uploaded next to index.html (or a full image URL). Empty = initials
+  accent: "#7c5cff",     // main colour (also update theme-color in <head> if you like)
+  theme:  "auto",        // "auto" (follows the device), "light" or "dark"
+  openInNewTab: false,   // true = links open in a new tab
+  startOpen: "",         // a category to show on arrival, e.g. "Music". Empty = visitors pick one
+
+  // Each category is a tile. Tapping a tile shows its links.
+  //   about: optional line shown above that category's links
+  //   link options: subtitle (second line), featured: true (highlighted),
+  //                 hidden: true (keep but don't show), copy: "text" (tap copies instead of opening)
+  groups: [
+    { title: "Personal", icon: "user", links: [
+      { title: "E-mail", subtitle: "ahmetcankizilcan@gmail.com", url: "mailto:ahmetcankizilcan@gmail.com", icon: "mail", copy: "ahmetcankizilcan@gmail.com" },
+      { title: "Instagram", subtitle: "@ahmetcankizilcan", url: "https://www.instagram.com/ahmetcankizilcan/", icon: "camera" },
+    ]},
+    { title: "Music", icon: "music",
+      about: "Tenor / Baritone · Conductor · Arranger & Engraver · Vocal Coach",
+      links: [
+      { title: "Music CV", url: "cv.html", icon: "file" },
+      { title: "YouTube", subtitle: "@AhmetCanK", url: "https://www.youtube.com/@AhmetCanK", icon: "video" },
+      { title: "Row, Row, Row Your Tone", subtitle: "Twelve-tone row generator & post-tonal analysis", url: "https://ackc92.github.io/rowyourtone/", icon: "music" },
+    ]},
+    { title: "Gaming", subtitle: "AC/KC", icon: "gamepad", links: [
+      { title: "Twitch", subtitle: "ackcshreds", url: "https://www.twitch.tv/ackcshreds", icon: "live" },
+      { title: "Instagram", subtitle: "@ackcshreds", url: "https://www.instagram.com/ackcshreds/", icon: "camera" },
+    ]},
+  ],
+
+  footer: "© 2026 Ahmet Can",
+};
+/* ═══ END OF EDITABLE PART ═══════════════════════════════════════════ */
+
+const ICONS = {
+  user:     '<circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>',
+  gamepad:  '<path d="M6.5 8h11a4.5 4.5 0 0 1 4.5 4.5v1.8a2.7 2.7 0 0 1-4.8 1.7L15.5 14h-7l-1.7 2a2.7 2.7 0 0 1-4.8-1.7v-1.8A4.5 4.5 0 0 1 6.5 8z"/><path d="M7.5 10v3.5M5.75 11.75h3.5"/><path d="M15.5 11h.01M18 12.5h.01" stroke-width="2.6"/>',
+  link:     '<path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/>',
+  globe:    '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z"/>',
+  video:    '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/>',
+  live:     '<circle cx="12" cy="12" r="2"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/>',
+  music:    '<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+  mic:      '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/>',
+  camera:   '<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  mail:     '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/>',
+  ticket:   '<path d="M3 8a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2.5a1.5 1.5 0 0 0 0 3V16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2.5a1.5 1.5 0 0 0 0-3z"/><path d="M14.5 7v10" stroke-dasharray="1.5 2.5"/>',
+  heart:    '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/>',
+  file:     '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+  shop:     '<path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+  chat:     '<path d="M7 5h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-9l-5 4V7a2 2 0 0 1 2-2z"/>',
+};
+const GO = '<path d="M7 17 17 7M9 7h8v8"/>';
+const COPY = '<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>';
+const CHECK = '<path d="M5 12.5l4.5 4.5L19 7.5"/>';
+
+const svg = (paths, cls) =>
+  `<svg${cls ? ` class="${cls}"` : ""} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text) n.textContent = text;
+  return n;
+};
+const initials = (s) => (s || "").trim().split(/\s+/).map(w => w[0] || "").slice(0, 2).join("").toUpperCase();
+const slug = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const makeAnchor = (url) => {
+  const a = document.createElement("a");
+  a.href = url || "#";
+  if (CONFIG.openInNewTab && /^https?:/i.test(a.href)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+  return a;
+};
+
+// Copy text to the clipboard; falls back to the old method for in-app browsers
+async function copyText(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (e) { /* try the fallback below */ }
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+  document.body.appendChild(ta);
+  ta.select();
+  ta.setSelectionRange(0, text.length);
+  let ok = false;
+  try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+  ta.remove();
+  return ok;
+}
+
+// One link button
+function linkItem(item, i) {
+  const li = el("li");
+  li.style.setProperty("--i", i);
+  const hasIcon = item.icon && item.icon !== "none";
+  li.className = "link" + (item.featured ? " featured" : "") + (hasIcon ? "" : " noicon");
+  const a = makeAnchor(item.url);
+  if (hasIcon) {
+    const ico = el("span", "ico");
+    ico.innerHTML = svg(ICONS[item.icon] || ICONS.link);
+    a.appendChild(ico);
+  }
+  const txt = el("span", "txt");
+  txt.appendChild(el("span", "t", item.title));
+  const sub = el("span", "s", item.subtitle || "");
+  if (item.subtitle || item.copy) txt.appendChild(sub);
+  a.appendChild(txt);
+  a.insertAdjacentHTML("beforeend", svg(item.copy ? COPY : GO, "go"));
+
+  // "copy" buttons copy their text instead of opening the link
+  if (item.copy) {
+    a.classList.add("copy");
+    a.title = "Copy " + item.copy;
+    sub.setAttribute("aria-live", "polite");
+    let timer;
+    a.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (!(await copyText(item.copy))) { if (item.url) location.href = item.url; return; }  // couldn't copy: open the link instead
+      clearTimeout(timer);
+      sub.textContent = "Copied to clipboard";
+      a.classList.add("copied");
+      a.querySelector(".go").innerHTML = CHECK;
+      timer = setTimeout(() => {
+        sub.textContent = item.subtitle || "";
+        a.classList.remove("copied");
+        a.querySelector(".go").innerHTML = COPY;
+      }, 1800);
+    });
+  }
+  li.appendChild(a);
+  return li;
+}
+
+(function render() {
+  const c = CONFIG, root = document.documentElement;
+  if (c.accent) root.style.setProperty("--accent", c.accent);
+  if (c.theme === "light" || c.theme === "dark") root.dataset.theme = c.theme;
+  document.title = c.name;
+
+  // Profile
+  document.getElementById("name").textContent = c.name;
+  const bio = document.getElementById("bio");
+  bio.textContent = c.bio || "";
+  bio.hidden = !c.bio;
+
+  const av = document.getElementById("avatar");
+  av.textContent = initials(c.name);           // shown until (or instead of) the photo
+  if (c.avatar) {
+    const img = new Image();
+    img.alt = "";
+    img.onload = () => { av.textContent = ""; av.appendChild(img); };
+    img.src = c.avatar;
+  }
+
+  // Category tiles
+  const cats = document.getElementById("cats");
+  const panel = document.getElementById("panel");
+  const list = document.getElementById("links");
+  const hint = document.getElementById("hint");
+  const groups = (c.groups || []).map(g => ({ ...g, id: slug(g.title), links: (g.links || []).filter(l => !l.hidden) }));
+  let current = null;
+
+  function open(id, byUser) {
+    const g = groups.find(x => x.id === id) || null;
+    current = g ? g.id : null;
+    groups.forEach(x => x.button.setAttribute("aria-selected", String(x === g)));
+    list.replaceChildren();
+    panel.querySelector(".about")?.remove();
+    panel.hidden = !g;
+    hint.hidden = !!g;
+    try { history.replaceState(null, "", location.pathname + location.search + (g ? "#" + g.id : "")); } catch (e) {}
+    if (!g) return;
+    panel.setAttribute("aria-labelledby", g.button.id);
+    if (g.about) panel.insertBefore(el("p", "about", g.about), list);
+    g.links.forEach((item, i) => list.appendChild(linkItem(item, i)));
+    if (byUser && panel.getBoundingClientRect().bottom > window.innerHeight) {
+      panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }
+
+  groups.forEach((g, gi) => {
+    const b = el("button", "cat");
+    b.type = "button";
+    b.id = "tab-" + g.id;
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", "false");
+    b.setAttribute("aria-controls", "panel");
+    b.style.setProperty("--i", gi);
+    const big = el("span", "big");
+    big.innerHTML = svg(ICONS[g.icon] || ICONS.link);
+    b.appendChild(big);
+    b.appendChild(el("span", "name", g.title));
+    if (g.subtitle) b.appendChild(el("span", "sub", g.subtitle));
+    const mini = el("span", "mini");
+    mini.setAttribute("aria-hidden", "true");
+    mini.innerHTML = g.links.slice(0, 4).map(l => svg(ICONS[l.icon] || ICONS.link)).join("");
+    b.appendChild(mini);
+    b.addEventListener("click", () => open(current === g.id ? null : g.id, true));   // tap again to close
+    g.button = b;
+    cats.appendChild(b);
+  });
+
+  // Arrow keys move between tiles
+  cats.addEventListener("keydown", (e) => {
+    const idx = groups.findIndex(g => g.button === document.activeElement);
+    if (idx < 0 || !["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+    e.preventDefault();
+    const next = groups[(idx + (e.key === "ArrowRight" ? 1 : -1) + groups.length) % groups.length];
+    next.button.focus();
+    open(next.id, true);
+  });
+
+  // Open a category from the link (e.g. …/links/#music) or the startOpen setting
+  const fromHash = decodeURIComponent(location.hash.slice(1));
+  open(groups.some(g => g.id === fromHash) ? fromHash : slug(c.startOpen), false);
+
+  // Footer
+  const foot = document.getElementById("footer");
+  foot.textContent = c.footer || "";
+  foot.hidden = !c.footer;
+
+  // Share button: native share sheet on phones, copy-to-clipboard elsewhere
+  const btn = document.getElementById("share");
+  const label = btn.querySelector("span");
+  const flash = (msg) => {
+    label.textContent = msg;
+    setTimeout(() => { label.textContent = "Share this page"; }, 1800);
+  };
+  btn.addEventListener("click", async () => {
+    const data = { title: document.title, url: location.href.split("#")[0] };
+    try {
+      if (navigator.share) await navigator.share(data);
+      else if (await copyText(data.url)) flash("Link copied");
+      else flash("Couldn't copy");
+    } catch (e) {
+      if (e.name !== "AbortError") flash("Couldn't share");
+    }
+  });
+})();
+</script>
+</body>
+</html>
